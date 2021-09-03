@@ -26,11 +26,6 @@ body {
   margin-right: 5px;
 }
 
-.botoes-calculadora {
-  display: -ms-inline-grid;
-  margin: 5px;
-}
-
 .botao {
   margin: 2px;
   padding: 5px;
