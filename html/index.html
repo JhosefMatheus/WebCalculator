@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Especificando a linguagem do site -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 
+        Serve para identificar em qual página web do Internet Explorer a minha página web será renderizada.
+        Neste exemplo a página será renderizada no Internet Explorer Edge.
+    -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Configurando a página pra ser visível tanto para dispositivos móveis como dispositivos desktops -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Web Calculator</title>
+</head>
+<body>
+    
+    <div id="calculator">
+        <div id="calculator_screen">
+            <p id="screen_text">0</p>
+        </div>
+
+        <div id="calculator_buttons">
+            <div class="row">
+                <input type="button" value="&percnt;" class="operator">
+                <input type="button" value="CE" class="operator">
+                <input type="button" value="C" class="operator">
+                <input type="button" value="&larr;" class="operator">
+            </div>
+            
+            <div class="row">
+                <input type="button" value="1/x" class="operator">
+                <input type="button" value="x²" class="operator">
+                <input type="button" value="&radic;x" class="operator">
+                <input type="button" value="&divide;" class="operator">
+            </div>
+            
+            <div class="row">
+                <input type="button" value="7" class="not_operator">
+                <input type="button" value="8" class="not_operator">
+                <input type="button" value="9" class="not_operator">
+                <input type="button" value="&times;" class="operator">
+            </div>
+            
+            <div class="row">
+                <input type="button" value="4" class="not_operator">
+                <input type="button" value="5" class="not_operator">
+                <input type="button" value="6" class="not_operator">
+                <input type="button" value="-" class="operator">
+            </div>
+            
+            <div class="row">
+                <input type="button" value="1" class="not_operator">
+                <input type="button" value="2" class="not_operator">
+                <input type="button" value="3" class="not_operator">
+                <input type="button" value="+" class="operator">
+            </div>
+            
+            <div class="row">
+                <input type="button" value="+/-" class="not_operator">
+                <input type="button" value="0" class="not_operator">
+                <input type="button" value="," class="not_operator">
+                <input type="button" value="=" class="operator">
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
