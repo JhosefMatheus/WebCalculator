@@ -1,3 +1,10 @@
+:root {
+    --calculator-main-color: rgb(44, 44, 44);
+    --operator-buttons-color: rgb(82, 76, 76);
+    --no-operator-buttons-color: rgb(0, 0, 0);
+    --hover-color: rgb(184, 178, 178);
+}
+
 body {
     background-color: #000c52;
     width: 100vw;
@@ -10,12 +17,12 @@ body {
 }
 
 #calculator {
-    background: rgb(44, 44, 44);
+    background: var(--calculator-main-color);
     border-radius: 5px;
 }
 
 #calculator_screen {
-    background: rgb(44, 44, 44);
+    background: var(--calculator-main-color);
     margin: 5px;
     border-radius: 5px;
 }
@@ -24,12 +31,17 @@ body {
     text-align: end;
     margin-right: 5px;
     color: #fff;
+    font-size: 150%;
 }
 
-input {
+button {
     width: 50px;
     height: 30px;
     color: #fff;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 115%;
 }
 
 #calculator_buttons {
@@ -41,9 +53,13 @@ input {
 }
 
 .operator {
-    background: rgb(44, 44, 44);
+    background: var(--operator-buttons-color);
 }
 
 .not_operator {
-    background: rgb(44, 44, 44);
+    background: var(--no-operator-buttons-color);
+}
+
+button:focus {
+    outline: none;
 }
