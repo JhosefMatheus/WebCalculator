@@ -60,6 +60,6 @@ button {
     background: var(--no-operator-buttons-color);
 }
 
-button:focus {
-    outline: none;
+button:hover {
+    background: var(--hover-color);
 }
