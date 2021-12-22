@@ -21,28 +21,27 @@ function button_click() {
                         break;
                     
                     case "CE":
-
+                        clear_entry();
                         break;
 
                     case "C":
-
+                        clear_all();
                         break;
                     
                     case "\u2190":
-
                         backspace();
                         break;
                     
                     case "1/x":
-                        
+                        division_by();
                         break;
                     
                     case "x²":
-
+                        pow_2();
                         break;
                     
-                    case "\u221A":
-
+                    case "\u221Ax":
+                        sqrt_x();
                         break;
                     
                     case "\u00F7":
@@ -111,6 +110,40 @@ function backspace() {
         }
 
     }
+
+}
+
+function clear_entry() {
+
+    register[register.length - 1] = null;
+    calculator_screen.innerHTML = "0";
+    console.log(register)
+
+}
+
+function clear_all() {
+
+    register = [null,];
+    calculator_screen.innerHTML = "0";
+    console.log(register)
+
+}
+
+function division_by() {
+
+    calculator_screen.innerHTML = 1/parseFloat(calculator_screen.innerHTML);
+
+}
+
+function pow_2() {
+
+    calculator_screen.innerHTML = Math.pow(parseFloat(calculator_screen.innerHTML), 2);
+
+}
+
+function sqrt_x() {
+    
+    calculator_screen.innerHTML = Math.sqrt(parseFloat(calculator_screen.innerHTML));
 
 }
 
