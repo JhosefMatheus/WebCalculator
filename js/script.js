@@ -45,23 +45,23 @@ function button_click() {
                         break;
                     
                     case "\u00F7":
-
+                        division();
                         break;
                     
                     case "\u00D7":
-
+                        times();
                         break;
 
                     case "-":
-
+                        diff();
                         break;
                     
                     case "+":
-
+                        sum();
                         break;
                     
                     case "=":
-
+                        equals();
                         break;
                 }
 
@@ -89,6 +89,20 @@ function button_click_number(button) {
         
         calculator_screen.innerHTML = register[0];
 
+    } else if (register.length === 3) {
+
+        if (register[2] === null) {
+
+            register[2] = button.innerHTML;
+
+        } else {
+
+            register[2] += button.innerHTML;
+
+        }
+
+        calculator_screen.innerHTML = register[2];
+
     }
 
 }
@@ -105,6 +119,20 @@ function backspace() {
         } else if (register[0].length === 1 && register[0] !== null) {
 
             register[0] = null;
+            calculator_screen.innerHTML = "0";
+
+        }
+
+    } else if (register.length === 3) {
+
+        if (register[2].length > 1) {
+
+            register[2] = register[2].slice(0, -1);
+            calculator_screen.innerHTML = register[2];
+
+        } else if (register[2].length === 1) {
+
+            register[2] = null;
             calculator_screen.innerHTML = "0";
 
         }
@@ -131,7 +159,19 @@ function clear_all() {
 
 function division_by() {
 
-    calculator_screen.innerHTML = 1/parseFloat(calculator_screen.innerHTML);
+    var resultado = 1/parseFloat(calculator_screen.innerHTML);
+
+    if (resultado === Infinity) {
+
+        alert("Itsn't possible to divide a number by zero.");
+            
+    } else {
+        
+        calculator_screen.innerHTML = resultado;
+        
+    }
+    
+    register = [null,];
 
 }
 
@@ -143,7 +183,148 @@ function pow_2() {
 
 function sqrt_x() {
     
-    calculator_screen.innerHTML = Math.sqrt(parseFloat(calculator_screen.innerHTML));
+    var resultado = Math.sqrt(parseFloat(calculator_screen.innerHTML));
+
+    if (resultado === NaN) {
+
+        alert("Itsn't possible to show an undefined result.");
+
+    } else {
+
+        calculator_screen.innerHTML = resultado;
+
+    }
+
+    register = [null,];
+
+}
+
+function division() {
+
+    if (register.length === 1 && register[0] === null) {
+
+        register[0] = calculator_screen.innerHTML;
+        register.push("/", null);
+
+    } else if (register.length === 1 && register[0] !== null) {
+
+        register.push("/", null);
+
+    } else if (register.length === 3 && register[2] === null) {
+
+        register[1] = "/";
+
+    } else if (register.length === 3 && register[3] !== null) {
+
+        var resultado = eval(register.join(""));
+        calculator_screen.innerHTML = resultado;
+
+        register = [resultado, "/", null];
+
+    }
+    
+}
+
+function times() {
+    
+    if (register.length === 1 && register[0] === null) {
+    
+        register[0] = calculator_screen.innerHTML;
+        register.push("*", null);
+    
+    } else if (register.length === 1 && register[0] !== null) {
+    
+        register.push("*", null);
+    
+    } else if (register.length === 3 && register[2] === null) {
+    
+        register[1] = "*";
+    
+    } else if (register.length === 3 && register[3] !== null) {
+    
+        var resultado = eval(register.join(""));
+        calculator_screen.innerHTML = resultado;
+    
+        register = [resultado, "*", null];
+    
+    }
+    
+}
+
+function diff() {
+    
+    if (register.length === 1 && register[0] === null) {
+    
+        register[0] = calculator_screen.innerHTML;
+        register.push("-", null);
+    
+    } else if (register.length === 1 && register[0] !== null) {
+    
+        register.push("-", null);
+    
+    } else if (register.length === 3 && register[2] === null) {
+    
+        register[1] = "-";
+    
+    } else if (register.length === 3 && register[3] !== null) {
+    
+        var resultado = eval(register.join(""));
+        calculator_screen.innerHTML = resultado;
+    
+        register = [resultado, "-", null];
+    
+    }
+    
+}
+
+function sum() {
+    
+    if (register.length === 1 && register[0] === null) {
+    
+        register[0] = calculator_screen.innerHTML;
+        register.push("+", null);
+    
+    } else if (register.length === 1 && register[0] !== null) {
+    
+        register.push("+", null);
+    
+    } else if (register.length === 3 && register[2] === null) {
+    
+        register[1] = "+";
+    
+    } else if (register.length === 3 && register[3] !== null) {
+    
+        var resultado = eval(register.join(""));
+        calculator_screen.innerHTML = resultado;
+    
+        register = [resultado, "+", null];
+    
+    }
+
+}
+
+function equals() {
+
+    if (register.length === 3 && register[2] !== null) {
+
+        var resultado = eval(register.join(""));
+        calculator_screen.innerHTML = resultado;
+
+        register = [null,];
+
+    } else if ((register.length === 3 && register[2] === null) || (register.length === 1 && register[0] !== null)) {
+
+        calculator_screen.innerHTML = register[0];
+
+        register = [null,];
+
+    } else if (register.length === 1 && register[0] === null) {
+
+        calculator_screen.innerHTML = "0";
+
+        register = [null,];
+
+    }
 
 }
 
