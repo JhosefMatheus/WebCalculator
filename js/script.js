@@ -17,7 +17,7 @@ function button_click() {
 
                 switch (button.innerHTML) {
                     case "\u0025":
-                        
+                        percent();
                         break;
                     
                     case "CE":
@@ -201,7 +201,6 @@ function clear_entry() {
 
     register[register.length - 1] = null;
     calculator_screen.innerHTML = "0";
-    console.log(register)
 
 }
 
@@ -209,7 +208,6 @@ function clear_all() {
 
     register = [null,];
     calculator_screen.innerHTML = "0";
-    console.log(register)
 
 }
 
@@ -272,7 +270,7 @@ function division() {
         
     } else if (register.length === 3 && register[3] !== null) {
         
-        var resultado = eval(register.join(""));
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
         
         if (resultado === Infinity) {
             
@@ -311,7 +309,7 @@ function times() {
         
     } else if (register.length === 3 && register[3] !== null) {
         
-        var resultado = eval(register.join(""));
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
         calculator_screen.innerHTML = resultado;
         
         register = [resultado, "*", null];
@@ -337,7 +335,7 @@ function diff() {
         
     } else if (register.length === 3 && register[3] !== null) {
         
-        var resultado = eval(register.join(""));
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
         calculator_screen.innerHTML = resultado;
         
         register = [resultado, "-", null];
@@ -363,7 +361,7 @@ function sum() {
         
     } else if (register.length === 3 && register[3] !== null) {
         
-        var resultado = eval(register.join(""));
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
         calculator_screen.innerHTML = resultado;
         
         register = [resultado, "+", null];
@@ -376,34 +374,74 @@ function equals() {
     
     if (register.length === 3 && register[2] !== null) {
         
-        var resultado = eval(register.join(""));
+        if (register[1] === "%") {
+        
+            register[0] = parseFloat(register[0])/100;
+            register[1] = "*";
+        
+        }
+
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
         
         if (resultado === Infinity) {
             
             alert("Itsn't possible to divide a number by zero.");
 
         } else {
-
+            
             calculator_screen.innerHTML = resultado;
-
+            
         }
 
-        register = [null,];
+    } else if (register.length === 3 && register[1] === "%" && register[2] === null) {
+
+        calculator_screen.innerHTML = parseFloat(register[0])/100;
 
     } else if ((register.length === 3 && register[2] === null) || (register.length === 1 && register[0] !== null)) {
 
         calculator_screen.innerHTML = register[0];
-
-        register = [null,];
-
+        
     } else if (register.length === 1 && register[0] === null) {
-
+        
         calculator_screen.innerHTML = "0";
-
-        register = [null,];
-
+        
     }
+    
+    register = [null,]
 
+}
+
+function percent() {
+    
+    if (register.length === 1 && register[0] === null) {
+        
+        register[0] = calculator_screen.innerHTML;
+        register.push("%", null);
+        
+    } else if (register.length === 1 && register[0] !== null) {
+        
+        register.push("%", null);
+        
+    } else if (register.length === 3 && register[2] === null) {
+        
+        register[1] = "%";
+        
+    } else if (register.length === 3 && register[2] !== null) {
+        
+        if (register[1] === "%") {
+
+            register[0] = parseFloat(register[0])/100;
+            register[1] = "*";
+
+        }
+
+        var resultado = eval(`(${register[0]})${register[1]}(${register[2]})`);
+        calculator_screen.innerHTML = resultado;
+        
+        register = [resultado, "%", null];
+        
+    }
+    
 }
 
 button_click();
