@@ -241,7 +241,7 @@ function sqrt_x() {
     
     var resultado = Math.sqrt(parseFloat(calculator_screen.innerHTML));
     
-    if (resultado === NaN) {
+    if (isNaN(resultado)) {
         
         alert("Itsn't possible to show an undefined result.");
         
