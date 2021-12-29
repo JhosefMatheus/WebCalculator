@@ -74,8 +74,16 @@ function button_click() {
 }
 
 function button_click_number(button) {
+
+    if (button.innerHTML === ",") {
+
+        floating_point();
     
-    if (register.length === 1) {
+    } else if (button.innerHTML === "+/-") {
+
+        change_signal();
+
+    }else if (register.length === 1) {
         
         if (register[0] === null) {
 
@@ -101,6 +109,54 @@ function button_click_number(button) {
 
         }
 
+        calculator_screen.innerHTML = register[2];
+
+    }
+
+}
+
+function floating_point() {
+
+    if (register.length === 1 && register[0] === null) {
+
+        register[0] = "0.";
+
+        calculator_screen.innerHTML = register[0];
+        
+    } else if (register.length === 1 && register[0] !== null && !register[0].includes(".")) {
+        
+        register[0] += ".";
+        
+        calculator_screen.innerHTML = register[0];
+        
+    } else if (register.length === 3 && register[2] === null) {
+        
+        register[2] = "0.";
+        
+        calculator_screen.innerHTML = register[2];
+        
+    } else if (register.length === 3 && register[2] !== null && !register[2].includes(".")) {
+        
+        register[2] += ".";
+        
+        calculator_screen.innerHTML = register[2];
+
+    }
+
+}
+
+function change_signal() {
+
+    if (register.length === 1 && register[0] !== null) {
+
+        register[0] = String(parseFloat(register[0])*-1);
+
+        calculator_screen.innerHTML = register[0];
+        
+    } else if (register.length === 3 && register[2] !== null) {
+        
+        register[2] = String(parseFloat(register[2])*-1);
+        
         calculator_screen.innerHTML = register[2];
 
     }
@@ -164,7 +220,7 @@ function division_by() {
     if (resultado === Infinity) {
 
         alert("Itsn't possible to divide a number by zero.");
-            
+        
     } else {
         
         calculator_screen.innerHTML = resultado;
@@ -172,55 +228,68 @@ function division_by() {
     }
     
     register = [null,];
-
+    
 }
 
 function pow_2() {
-
+    
     calculator_screen.innerHTML = Math.pow(parseFloat(calculator_screen.innerHTML), 2);
-
+    
 }
 
 function sqrt_x() {
     
     var resultado = Math.sqrt(parseFloat(calculator_screen.innerHTML));
-
+    
     if (resultado === NaN) {
-
+        
         alert("Itsn't possible to show an undefined result.");
-
+        
     } else {
-
+        
         calculator_screen.innerHTML = resultado;
-
+        
     }
-
+    
     register = [null,];
-
+    
 }
 
 function division() {
-
+    
     if (register.length === 1 && register[0] === null) {
-
+        
         register[0] = calculator_screen.innerHTML;
         register.push("/", null);
-
+        
     } else if (register.length === 1 && register[0] !== null) {
-
+        
         register.push("/", null);
-
+        
     } else if (register.length === 3 && register[2] === null) {
-
+        
         register[1] = "/";
-
+        
     } else if (register.length === 3 && register[3] !== null) {
-
+        
         var resultado = eval(register.join(""));
-        calculator_screen.innerHTML = resultado;
-
-        register = [resultado, "/", null];
-
+        
+        if (resultado === Infinity) {
+            
+            alert("Itsn't possible to divide a number by zero.");
+            
+            calculator_screen.innerHTML = "0";
+            
+            register = ["0", "/", null];
+            
+        } else {
+            
+            calculator_screen.innerHTML = resultado;
+            
+            register = [resultado, "/", null];
+            
+        }
+        
     }
     
 }
@@ -228,25 +297,25 @@ function division() {
 function times() {
     
     if (register.length === 1 && register[0] === null) {
-    
+        
         register[0] = calculator_screen.innerHTML;
         register.push("*", null);
     
     } else if (register.length === 1 && register[0] !== null) {
     
         register.push("*", null);
-    
+        
     } else if (register.length === 3 && register[2] === null) {
-    
+        
         register[1] = "*";
-    
+        
     } else if (register.length === 3 && register[3] !== null) {
-    
+        
         var resultado = eval(register.join(""));
         calculator_screen.innerHTML = resultado;
-    
+        
         register = [resultado, "*", null];
-    
+        
     }
     
 }
@@ -254,25 +323,25 @@ function times() {
 function diff() {
     
     if (register.length === 1 && register[0] === null) {
-    
+        
         register[0] = calculator_screen.innerHTML;
         register.push("-", null);
-    
+        
     } else if (register.length === 1 && register[0] !== null) {
-    
+        
         register.push("-", null);
-    
+        
     } else if (register.length === 3 && register[2] === null) {
-    
+        
         register[1] = "-";
-    
+        
     } else if (register.length === 3 && register[3] !== null) {
-    
+        
         var resultado = eval(register.join(""));
         calculator_screen.innerHTML = resultado;
-    
+        
         register = [resultado, "-", null];
-    
+        
     }
     
 }
@@ -280,35 +349,44 @@ function diff() {
 function sum() {
     
     if (register.length === 1 && register[0] === null) {
-    
+        
         register[0] = calculator_screen.innerHTML;
         register.push("+", null);
-    
+        
     } else if (register.length === 1 && register[0] !== null) {
-    
+        
         register.push("+", null);
-    
+        
     } else if (register.length === 3 && register[2] === null) {
-    
+        
         register[1] = "+";
-    
+        
     } else if (register.length === 3 && register[3] !== null) {
-    
+        
         var resultado = eval(register.join(""));
         calculator_screen.innerHTML = resultado;
-    
+        
         register = [resultado, "+", null];
-    
+        
     }
-
+    
 }
 
 function equals() {
-
+    
     if (register.length === 3 && register[2] !== null) {
-
+        
         var resultado = eval(register.join(""));
-        calculator_screen.innerHTML = resultado;
+        
+        if (resultado === Infinity) {
+            
+            alert("Itsn't possible to divide a number by zero.");
+
+        } else {
+
+            calculator_screen.innerHTML = resultado;
+
+        }
 
         register = [null,];
 
